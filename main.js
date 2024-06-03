@@ -35,6 +35,8 @@ function show_question() {
     answers[2] = get_wrong_answer()
     answers[3] = get_wrong_answer()
 
+    answers = shuffle_array(answers);
+
     answers.forEach(a => {
         let element = document.createElement('button')
         element.innerHTML = a
@@ -77,4 +79,31 @@ function show_results() {
 async function start_game() {
     await loadQuestionData(file)
     show_question()
+}
+
+// Shuffle an array using the Fisher-Yates Sorting Algorithm
+function shuffle_array(array) {
+    // Imagine a deck of cards
+    // For each card, we swap that card with another card
+    // Until we are at the end of the deck
+    
+    // Copy our original array, so we don't mutate the original
+    let copy = [];
+    for (let i = 0; i < array.length; i++) {
+        copy.push(array[i])
+    }
+
+    // Run through each card, randomly swapping it with another
+    // Some cards may be swapped more than once. Some cards may
+    // not move, but that's okay. That should be a possibility.
+    for (let i = 0; i < copy.length; i++) {
+        let random_spot = random_int(0, copy.length);
+        
+        // Perform the swap
+        let temp = copy[random_spot]
+        copy[random_spot] = copy[i]
+        copy[i] = temp;
+    }
+
+    return copy;
 }
