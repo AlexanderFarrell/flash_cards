@@ -97,7 +97,7 @@ function shuffle_array(array) {
     // Some cards may be swapped more than once. Some cards may
     // not move, but that's okay. That should be a possibility.
     for (let i = 0; i < copy.length; i++) {
-        let random_spot = random_int(0, copy.length);
+        let random_spot = get_random_int(0, copy.length);
         
         // Perform the swap
         let temp = copy[random_spot]
